@@ -50,7 +50,7 @@ export const FormURL =()=> {
             {(status.length> 0 && status ==="Loading....") && <span className="text-[20px] font-bold">{status}</span>}
             {(status.length> 0 && status.includes("Error")) && <span className="text-[20px] text-red-600 font-bold">{status}</span>}
             {
-                script.length >0 &&  
+                (script && script.length >0) &&  
                 <div>
                     <span className="text-[20px] font-bold">Kịch bản gốc:</span>
                     <p className="max-w-[800px] bg-black text-white p-3 rounded-md">{script}</p>
