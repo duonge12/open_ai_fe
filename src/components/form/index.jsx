@@ -11,14 +11,15 @@ export const FormURL =()=> {
   
     const handleSubmit=async(values)=>{
         try {
-            setStatus('Loading....')
             if(values.url.trim().length ===0) throw Error('Không đc bỏ trống url');
-
+            setStatus('Loading....')
             const formData=new FormData();
             formData.append('url',values.url.trim());
             const response = await openaiApi.getScript(formData);
-            setStatus("Success");
-            setScript(response.data)
+            if(response){
+                setStatus("Success");
+                setScript(response.data)
+            }
         } catch (error) {
             setStatus("Error: " + error.message);
         }
@@ -46,6 +47,7 @@ export const FormURL =()=> {
                 </Form>
             </Formik>
             {(status.length> 0 && status ==="Success") && <span className="text-[20px] text-green-500 font-bold">{status}</span>}
+            {(status.length> 0 && status ==="Loading....") && <span className="text-[20px] font-bold">{status}</span>}
             {(status.length> 0 && status.includes("Error")) && <span className="text-[20px] text-red-600 font-bold">{status}</span>}
             {
                 script.length >0 &&  
