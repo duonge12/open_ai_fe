@@ -2,16 +2,20 @@
 import { Field, Form, Formik } from "formik";
 import { useState } from "react";
 import { openaiApi } from "../../services/openaiApi";
+import { useDispatch } from "react-redux";
+import { them_kich_ban_mau } from "../../redux/stepSlice";
 
 
 
 export const FormURL =()=> {
     const [status, setStatus]=useState('');
-    const [script, setScript]=useState('')
+    const [script, setScript]=useState('');
+    const dispatch=useDispatch();
   
     const handleSubmit=async(values)=>{
         try {
             if(values.url.trim().length ===0) throw Error('Không đc bỏ trống url');
+            
             setStatus('Loading....')
             const formData=new FormData();
             formData.append('url',values.url.trim());
@@ -19,6 +23,7 @@ export const FormURL =()=> {
             if(response){
                 setStatus("Success");
                 setScript(response.data)
+                dispatch(them_kich_ban_mau(response.data))
             }
         } catch (error) {
             setStatus("Error: " + error.message);
