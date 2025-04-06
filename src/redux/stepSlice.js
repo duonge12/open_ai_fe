@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const ly_do_viral_prompt=
 `
 Đối tượng khách hàng: <span class="font-bold doi_tuong_kh">doi_tuong_kh</span> <br/>
-Tôi là <span class="font-bold __toi_la__">__toi_la__</span> xuất sắc, hãy phân tích thật kỹ lý do kịch bản của video này lên xu hướng bằng !__ngon_ngu_dich__! (thuật ngữ chuyên ngành hoặc chuyên môn có thể sử dụng !__ngon_ngu_chuyen_nganh__!)<br/>
+Tôi là <span class="font-bold toi_la">toi_la</span> xuất sắc, hãy phân tích thật kỹ lý do kịch bản của video này lên xu hướng bằng <span class="font-bold ngon_ngu_dich">ngon_ngu_dich</span> (thuật ngữ chuyên ngành hoặc chuyên môn có thể sử dụng <span class="font-bold ngon_ngu_chuyen_nganh">ngon_ngu_chuyen_nganh</span>)<br/>
 
-Đây là kịch bản: !__kich_ban_mau__!`;
+Đây là kịch bản: <span class="font-bold kich_ban_mau">kich_ban_mau</span>`;
 const viet_lai_dan_y_prompt=
 `Bước 2:
 Bạn là __toi_la__ trong __linh_vuc__ hãy giúp tôi viết lại cấu trúc dàn ý kịch bản mẫu này bằng __ngon_ngu_dich__ ( thuật ngữ chuyên ngành hoặc chuyên môn có thể sử dụng __ngon_ngu_chuyen_nganh__), để tôi có thể áp dụng cho những content khác. Sử dụng những nội dung trích từ kịch bản mẫu và đã chỉnh sử chính tả để làm ví dụ.

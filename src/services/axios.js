@@ -7,6 +7,6 @@ export const instance=axios.create({
         
     }
 });
-export const instanceFiles=axios.create({
-    baseURL:"/files",
+export const instanceKH=axios.create({
+    baseURL:"https://67f1f982c733555e24ae7102.mockapi.io/khach_hang/khach_hang",
 });

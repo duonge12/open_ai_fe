@@ -7,9 +7,7 @@ import { FormLyDoViral } from './components/formLyDoViral'
 
 const App=()=> {
   const step=useSelector(store=> store.listStep)
-  useEffect(()=>{
-    console.log(step)
-  })
+
   return(
     <div>
       <FormURL/>

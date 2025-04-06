@@ -1,10 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { instanceFiles } from "../services/axios";
+import { instanceKH } from "../services/axios";
 import { handleFileContent } from "../ultilities/handleFileContent";
 
 const handleFetchDoiTuongKH=createAsyncThunk('doiTuongKH/handleFetchDoiTuongKH',async()=>{
-    const response=await instanceFiles.get('/doiTuongKH.txt');
+    const response=await instanceKH.get('/');
     return  response.data;
 })
 
@@ -21,12 +20,12 @@ const doiTuongKHSlice=createSlice({
         builder
             .addCase(handleFetchDoiTuongKH.pending,(state)=>{
                 state.loading=true;
-                state.message="Loading";
+                state.message="loading";
             })
             .addCase(handleFetchDoiTuongKH.fulfilled,(state,action)=>{
-                const fileContent=handleFileContent(action.payload.data)
-                state.loading=false;
-                state.doiTuongKH=fileContent
+                state.loading=true;
+                state.doiTuongKH=action.payload;
+                state.message="success";
             })
     }
 })
