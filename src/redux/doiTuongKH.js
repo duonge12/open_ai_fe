@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { khachHangApi } from "../services/khachHangApi";
 import { handleFileContent } from "../ultilities/handleFileContent";
 
 const handleFetchDoiTuongKH=createAsyncThunk('doiTuongKH/handleFetchDoiTuongKH',async()=>{
-    const response=await instanceKH.get('/');
+    const response=await khachHangApi.getList();
     return  response.data;
 })
 
@@ -10,7 +11,7 @@ const initialState={
     doiTuongKH:undefined,
     loading:false,
     message:''
- };
+};
 const doiTuongKHSlice=createSlice({
     name:"doiTuongKH",
     initialState:initialState,
@@ -23,8 +24,8 @@ const doiTuongKHSlice=createSlice({
             })
             .addCase(handleFetchDoiTuongKH.fulfilled,(state,action)=>{
                 state.loading=true;
-                state.doiTuongKH=action.payload;
-                state.message="success";
+                const data=handleFileContent(action.payload)
+                console.log(data)
             })
     }
 })
