@@ -1,6 +1,5 @@
 Mô tả:
 Mục tiêu khách hàng muốn nhắm tới.
-Result:
+[Result]:
 Người xem tiktok,
-Người xem tiktok thích mèosaaaa,
-abccasdsad
+Người xem tiktok thích mèo,

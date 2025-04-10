@@ -7,6 +7,6 @@ export const instance=axios.create({
         
     }
 });
-export const instanceKH=axios.create({
-    baseURL:"https://67f1f982c733555e24ae7102.mockapi.io/khach_hang/khach_hang",
+export const instanceAi=axios.create({
+    baseURL:"https://67f1f982c733555e24ae7102.mockapi.io/ai_prompt",
 });
