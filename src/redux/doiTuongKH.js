@@ -23,9 +23,13 @@ const doiTuongKHSlice=createSlice({
                 state.message="loading";
             })
             .addCase(handleFetchDoiTuongKH.fulfilled,(state,action)=>{
-                state.loading=true;
+                state.loading=false;
                 const data=handleFileContent(action.payload)
-                console.log(data)
+                state.doiTuongKH=data;
+            })
+            .addCase(handleFetchDoiTuongKH.rejected,(state,action)=>{
+                state.loading=false;
+                state.doiTuongKH=['Error'];
             })
     }
 })
