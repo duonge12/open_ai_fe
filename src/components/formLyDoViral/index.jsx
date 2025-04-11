@@ -6,36 +6,40 @@ import { handleFetchDoiTuongKH } from "../../redux/doiTuongKH";
 
 export const FormLyDoViral=()=>{
     const {ly_do_viral_prompt}=useSelector(store=> store.listStep);
-    const {doiTuongKH}=useSelector(store=> store.doiTuongKH);
+    const {doiTuongKH, title}=useSelector(store=> store.doiTuongKH);
     const dispatch=useDispatch()
     const [ly_do_viral, setLy_do_viral]=useState(ly_do_viral_prompt);
     const [viralData, setViralData]=useState({
-        doi_tuong_kh:[],
-        toi_la:''
+        doiTuongKH:{
+            title:title,
+            selected:0
+        }
     });
-    const [visible, setVisible]=useState(false)
+    const [visible, setVisible]=useState(false);
+
     useEffect(()=>{
-        const newPrompt= Object.keys(viralData).reduce((previousValue, currentKey)=>{
-            const newValue=viralData[currentKey];
-            const seekRegex = new RegExp(`<span class="font-bold ${currentKey}">.*?<\\/span>`, "g");
-            return previousValue.replace(seekRegex,`<span class="font-bold ${currentKey}">${newValue}</span>`)
-        },ly_do_viral)
-        setLy_do_viral(newPrompt)
-    },[viralData])
+        if(doiTuongKH){
+            const newPrompt= Object.keys(viralData).reduce((previousValue, currentKey)=>{
+                const index=viralData[currentKey].selected;
+                const newValue=doiTuongKH[index];
+                const seekRegex = new RegExp(`<span class="font-bold ${currentKey}">.*?<\\/span>`, "g");
+                return previousValue.replace(seekRegex,`<span class="font-bold ${currentKey}">${newValue}</span>`)
+            },ly_do_viral)
+            setLy_do_viral(newPrompt)
+        }
+    },[viralData, doiTuongKH]);
+
     useEffect(()=>{
         if(!doiTuongKH){
             dispatch(handleFetchDoiTuongKH())
         }
-        if(doiTuongKH){
-            setViralData({...viralData,doi_tuong_kh:doiTuongKH})
-        }
-    },[doiTuongKH])
+    },[doiTuongKH]);
 
     return(
         <div className="border-t-2 mt-3">
             <h1 className="text-[20px]">Lý do viral</h1>
             <button className="button-55" onClick={()=>setVisible(true)}>Mở viral</button>
-            <ModalViral viralData={viralData} setViralData={setViralData} modalIsOpen={visible} closeModal={()=>setVisible(false)} onSubmit={setViralData}/>
+            <ModalViral viralData={viralData} setViralData={setViralData} modalIsOpen={visible} closeModal={()=>setVisible(false)} />
             <p className="max-w-[800px]" dangerouslySetInnerHTML={{__html:ly_do_viral}}/>
         </div>
     )

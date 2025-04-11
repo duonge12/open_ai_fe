@@ -9,7 +9,7 @@ const handleFetchDoiTuongKH=createAsyncThunk('doiTuongKH/handleFetchDoiTuongKH',
 
 const initialState={
     doiTuongKH:undefined,
-    title:"Đối tượng:"
+    title:"Đối tượng khách hàng:"
 };
 const doiTuongKHSlice=createSlice({
     name:"doiTuongKH",

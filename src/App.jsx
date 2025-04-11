@@ -6,8 +6,6 @@ import { useEffect } from 'react'
 import { FormLyDoViral } from './components/formLyDoViral'
 
 const App=()=> {
-  const step=useSelector(store=> store.listStep)
-
   return(
     <div>
       <FormURL/>
