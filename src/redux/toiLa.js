@@ -9,7 +9,6 @@ const handleFetchToiLa=createAsyncThunk('toiLa/handleFetchToiLa',async()=>{
 
 const initialState={
     toiLa:undefined,
-    title:"Tôi là:"
 };
 const toiLaSlice=createSlice({
     name:"toiLa",

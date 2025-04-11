@@ -8,18 +8,18 @@ import { isAllDataFilled } from "../../ultilities/handleCheckData";
 
 export const FormLyDoViral=()=>{
     const {ly_do_viral_prompt}=useSelector(store=> store.listStep);
-    const {doiTuongKH, title : khTitle}=useSelector(store=> store.doiTuongKH);
-    const {toiLa, title: toiLaTitle}=useSelector(store=> store.toiLa);
+    const {doiTuongKH}=useSelector(store=> store.doiTuongKH);
+    const {toiLa}=useSelector(store=> store.toiLa);
     const dispatch=useDispatch()
     const [ly_do_viral, setLy_do_viral]=useState(ly_do_viral_prompt);
     const [viralData, setViralData]=useState({
         doiTuongKH:{
-            title:khTitle,
+            title:"Đối tượng khách hàng:",
             data:undefined,
             selected:0
         },
         toiLa:{
-            title:toiLaTitle,
+            title:"Tôi là:",
             data:undefined,
             selected:0
         }
