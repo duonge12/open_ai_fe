@@ -9,8 +9,7 @@ const handleFetchDoiTuongKH=createAsyncThunk('doiTuongKH/handleFetchDoiTuongKH',
 
 const initialState={
     doiTuongKH:undefined,
-    loading:false,
-    message:''
+    title:"Đối tượng:"
 };
 const doiTuongKHSlice=createSlice({
     name:"doiTuongKH",
@@ -18,18 +17,9 @@ const doiTuongKHSlice=createSlice({
     reducers:{},
     extraReducers:(builder)=>{
         builder
-            .addCase(handleFetchDoiTuongKH.pending,(state)=>{
-                state.loading=true;
-                state.message="loading";
-            })
             .addCase(handleFetchDoiTuongKH.fulfilled,(state,action)=>{
-                state.loading=false;
                 const data=handleFileContent(action.payload)
                 state.doiTuongKH=data;
-            })
-            .addCase(handleFetchDoiTuongKH.rejected,(state,action)=>{
-                state.loading=false;
-                state.doiTuongKH=['Error'];
             })
     }
 })
