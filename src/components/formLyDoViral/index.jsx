@@ -2,38 +2,56 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { ModalViral } from "./modal";
 import { handleFetchDoiTuongKH } from "../../redux/doiTuongKH";
+import { handleFetchToiLa } from "../../redux/toiLa";
+import { isAllDataFilled } from "../../ultilities/handleCheckData";
 
 
 export const FormLyDoViral=()=>{
     const {ly_do_viral_prompt}=useSelector(store=> store.listStep);
-    const {doiTuongKH, title}=useSelector(store=> store.doiTuongKH);
+    const {doiTuongKH, title : khTitle}=useSelector(store=> store.doiTuongKH);
+    const {toiLa, title: toiLaTitle}=useSelector(store=> store.toiLa);
     const dispatch=useDispatch()
     const [ly_do_viral, setLy_do_viral]=useState(ly_do_viral_prompt);
     const [viralData, setViralData]=useState({
         doiTuongKH:{
-            title:title,
+            title:khTitle,
+            data:undefined,
+            selected:0
+        },
+        toiLa:{
+            title:toiLaTitle,
+            data:undefined,
             selected:0
         }
     });
     const [visible, setVisible]=useState(false);
 
     useEffect(()=>{
-        if(doiTuongKH){
+        if(isAllDataFilled(viralData)){
             const newPrompt= Object.keys(viralData).reduce((previousValue, currentKey)=>{
                 const index=viralData[currentKey].selected;
-                const newValue=doiTuongKH[index];
+                const newValue=viralData[currentKey].data[index]
                 const seekRegex = new RegExp(`<span class="font-bold ${currentKey}">.*?<\\/span>`, "g");
                 return previousValue.replace(seekRegex,`<span class="font-bold ${currentKey}">${newValue}</span>`)
             },ly_do_viral)
             setLy_do_viral(newPrompt)
         }
-    },[viralData, doiTuongKH]);
+    },[viralData]);
 
     useEffect(()=>{
         if(!doiTuongKH){
             dispatch(handleFetchDoiTuongKH())
         }
-    },[doiTuongKH]);
+        else{
+            setViralData({...viralData,doiTuongKH:{...viralData.doiTuongKH,data: doiTuongKH}})
+        }
+        if(!toiLa){
+            dispatch(handleFetchToiLa())
+        }
+        else{
+            setViralData({...viralData,toiLa:{ ...viralData.toiLa,data:toiLa}})
+        }
+    },[doiTuongKH, toiLa]);
 
     return(
         <div className="border-t-2 mt-3">

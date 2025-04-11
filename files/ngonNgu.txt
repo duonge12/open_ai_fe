@@ -1,0 +1,6 @@
+Mô tả:
+Ngôn ngữ dịch
+[Result]:
+Tiếng Anh, 
+Tiếng Việt,
+Tiếng Trung

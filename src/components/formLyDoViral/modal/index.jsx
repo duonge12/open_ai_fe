@@ -1,6 +1,6 @@
 import { Form, Formik  } from 'formik';
 import Modal from 'react-modal';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Dropdown } from '../../dropdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleFetchDoiTuongKH } from '../../../redux/doiTuongKH';
@@ -19,13 +19,6 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 export const ModalViral=({viralData, setViralData, modalIsOpen, closeModal})=>{
-    const {doiTuongKH}=useSelector(store=> store.doiTuongKH);
-    const dispatch=useDispatch()
-    useEffect(()=>{
-        if(!doiTuongKH){
-            dispatch(handleFetchDoiTuongKH())
-        }
-    },[doiTuongKH]);
     return(
         <div>
             <Modal
@@ -43,15 +36,17 @@ export const ModalViral=({viralData, setViralData, modalIsOpen, closeModal})=>{
                     <Form>
                         <h1>Viral</h1>
                         {Object.keys(values).map(key=>{
-                            const title=viralData[key].title;
-                            const selected=viralData[key].selected;
+                            console.log(values)
+                            const title=values[key].title;
+                            const data=values[key].data;
+                            const selected=values[key].selected;
                             return(
                                 <>
                                     <h1>{title}</h1>
                                     <Dropdown 
-                                        items={doiTuongKH} 
+                                        items={data} 
                                         name={`${key}.selected`} 
-                                        value={values[key].selected}
+                                        value={selected}
                                     />
                                 </>
                             )

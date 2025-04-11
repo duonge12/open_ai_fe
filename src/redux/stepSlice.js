@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const ly_do_viral_prompt=
 `
 Đối tượng khách hàng: <span class="font-bold doiTuongKH">doiTuongKH</span> <br/>
-Tôi là <span class="font-bold toi_la">toi_la</span> xuất sắc, hãy phân tích thật kỹ lý do kịch bản của video này lên xu hướng bằng <span class="font-bold ngon_ngu_dich">ngon_ngu_dich</span> (thuật ngữ chuyên ngành hoặc chuyên môn có thể sử dụng <span class="font-bold ngon_ngu_chuyen_nganh">ngon_ngu_chuyen_nganh</span>)<br/>
+Tôi là <span class="font-bold toiLa">toiLa</span> xuất sắc, hãy phân tích thật kỹ lý do kịch bản của video này lên xu hướng bằng <span class="font-bold ngon_ngu_dich">ngon_ngu_dich</span> (thuật ngữ chuyên ngành hoặc chuyên môn có thể sử dụng <span class="font-bold ngon_ngu_chuyen_nganh">ngon_ngu_chuyen_nganh</span>)<br/>
 
 Đây là kịch bản: <span class="font-bold kich_ban_mau">kich_ban_mau</span>`;
 const viet_lai_dan_y_prompt=
