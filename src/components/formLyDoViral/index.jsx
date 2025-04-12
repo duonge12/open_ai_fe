@@ -4,11 +4,13 @@ import { ModalViral } from "./modal";
 import { handleFetchDoiTuongKH } from "../../redux/doiTuongKH";
 import { handleFetchToiLa } from "../../redux/toiLa";
 import { isAllDataFilled } from "../../ultilities/handleCheckData";
+import { handleFetchNgonNgu } from "../../redux/ngonNgu";
 
 
-export const FormLyDoViral=()=>{
+export const FormLyDoViral=({title, data, prompt})=>{
     const {ly_do_viral_prompt}=useSelector(store=> store.listStep);
     const {doiTuongKH}=useSelector(store=> store.doiTuongKH);
+    const {ngonNgu}=useSelector(store=> store.ngonNgu);
     const {toiLa}=useSelector(store=> store.toiLa);
     const dispatch=useDispatch()
     const [ly_do_viral, setLy_do_viral]=useState(ly_do_viral_prompt);
@@ -19,10 +21,20 @@ export const FormLyDoViral=()=>{
             selected:0
         },
         toiLa:{
-            title:"Tôi là:",
+            title:"Tôi là :",
             data:undefined,
             selected:0
-        }
+        },
+        ngonNguDich:{
+            title:"Ngôn ngữ dịch :",
+            data:undefined,
+            selected:0
+        },
+        ngonNguChuyenNganh:{
+            title:"Ngôn ngữ chuyên ngành :",
+            data:undefined,
+            selected:0
+        },
     });
     const [visible, setVisible]=useState(false);
 
@@ -39,26 +51,41 @@ export const FormLyDoViral=()=>{
     },[viralData]);
 
     useEffect(()=>{
+        let newViralData={...viralData};
         if(!doiTuongKH){
             dispatch(handleFetchDoiTuongKH())
         }
         else{
-            setViralData({...viralData,doiTuongKH:{...viralData.doiTuongKH,data: doiTuongKH}})
+            newViralData={...newViralData,
+                doiTuongKH:{...newViralData.doiTuongKH,data: doiTuongKH}
+            }
         }
         if(!toiLa){
             dispatch(handleFetchToiLa())
         }
         else{
-            setViralData({...viralData,toiLa:{ ...viralData.toiLa,data:toiLa}})
+            newViralData={...newViralData,
+                toiLa:{...newViralData.toiLa,data: toiLa}
+            }
         }
-    },[doiTuongKH, toiLa]);
+        if(!ngonNgu){
+            dispatch(handleFetchNgonNgu())
+        }
+        else{
+            newViralData={...newViralData,
+                ngonNguDich:{...newViralData.ngonNguDich,data: ngonNgu},
+                ngonNguChuyenNganh:{...newViralData.ngonNguChuyenNganh,data: ngonNgu},
+            }
+        }
+        setViralData({...newViralData})
+    },[doiTuongKH, toiLa, ngonNgu]);
 
     return(
-        <div className="border-t-2 mt-3">
-            <h1 className="text-[20px]">Lý do viral</h1>
+        <div className="border-t-2 mt-3 pl-2">
+            <h1 className="text-[20px]">{title}</h1>
             <button className="button-55" onClick={()=>setVisible(true)}>Mở viral</button>
             <ModalViral viralData={viralData} setViralData={setViralData} modalIsOpen={visible} closeModal={()=>setVisible(false)} />
-            <p className="max-w-[800px]" dangerouslySetInnerHTML={{__html:ly_do_viral}}/>
+            <p className="max-w-[800px] p-2 bg-black text-white my-3" dangerouslySetInnerHTML={{__html:ly_do_viral}}/>
         </div>
     )
 }

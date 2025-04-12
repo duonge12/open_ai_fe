@@ -9,16 +9,14 @@ export const Dropdown = ({ items, name, value }) => {
   };
 
   return (
-    <div>
-      <select name={name} value={value} onChange={handleChange}>
+    <div className='p-1 border'>
+      <select className='outline-0' name={name} value={value} onChange={handleChange}>
         {items.map((item, index) => (
           <option key={index} value={index}>
             {item}
           </option>
         ))}
       </select>
-
-      <p>Selected: {items[value]}</p>
     </div>
   );
 };

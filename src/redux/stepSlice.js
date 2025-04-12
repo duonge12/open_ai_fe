@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const ly_do_viral_prompt=
 `
 Đối tượng khách hàng: <span class="font-bold doiTuongKH">doiTuongKH</span> <br/>
-Tôi là <span class="font-bold toiLa">toiLa</span> xuất sắc, hãy phân tích thật kỹ lý do kịch bản của video này lên xu hướng bằng <span class="font-bold ngon_ngu_dich">ngon_ngu_dich</span> (thuật ngữ chuyên ngành hoặc chuyên môn có thể sử dụng <span class="font-bold ngon_ngu_chuyen_nganh">ngon_ngu_chuyen_nganh</span>)<br/>
+Tôi là <span class="font-bold toiLa">toiLa</span> xuất sắc, hãy phân tích thật kỹ lý do kịch bản của video này lên xu hướng bằng <span class="font-bold ngonNguDich">ngonNguDich</span> (thuật ngữ chuyên ngành hoặc chuyên môn có thể sử dụng <span class="font-bold ngonNguChuyenNganh">ngonNguChuyenNganh</span>)<br/>
 
-Đây là kịch bản: <span class="font-bold kich_ban_mau">kich_ban_mau</span>`;
+Đây là kịch bản: <span class="font-bold kichBanMau">kichBanMau</span>`;
 const viet_lai_dan_y_prompt=
 `Bước 2:
 Bạn là __toi_la__ trong __linh_vuc__ hãy giúp tôi viết lại cấu trúc dàn ý kịch bản mẫu này bằng __ngon_ngu_dich__ ( thuật ngữ chuyên ngành hoặc chuyên môn có thể sử dụng __ngon_ngu_chuyen_nganh__), để tôi có thể áp dụng cho những content khác. Sử dụng những nội dung trích từ kịch bản mẫu và đã chỉnh sử chính tả để làm ví dụ.
@@ -20,9 +20,10 @@ Kịch bản chỉ có lời thoại, để trí tuệ nhân tạo có thể t�
 Kịch bản mẫu:__kich_ban_mau__
 Lý do viral:__ly_do_viral__
 Cấu trúc dàn ý: __cau_truc_dan_y__`
+const kich_ban_mau=`Top 10 sự thật về loài mèo mà có thể bạn chưa biết 1. Mèo có sức nhìn tốt hơn người trong bóng tối 2. Mèo không thể nhìn thấy màu đỏ 3. Mèo không ăn đường vì không cảm nhận được vị ngọt 4. Mèo có hơn 100 âm thanh để giao tiếp với đồng loại 5. Mèo không thích nước vì lớp lông của chúng sẽ không thể giữ ấm khi ướt 6. Mèo cũng có ngón tay cái nhưng không sử dụng được 7. Mèo có thể ngủ từ 13 đến 14 giờ mỗi ngày 8. Mèo thường hay thở ra tiếng gừ nhỏ mỗi khi chúng ngủ hoặc nái ngủ 9. Nếu một chú mèo nháy mắt với bạn có nghĩa là nó đang yêu bạn Và cuối cùng, mèo có thể học cách giao tiếp với con người Và đây là...`
 
 const initialState={
-   kich_ban:undefined,
+   kich_ban:kich_ban_mau,
    ly_do_viral_prompt:ly_do_viral_prompt,
    viet_lai_dan_y_prompt:viet_lai_dan_y_prompt,
    viet_lai_kich_ban_prompt:viet_lai_kich_ban_prompt
